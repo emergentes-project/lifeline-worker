@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: lifeline-worker
+  artemis:
+    mode: native
+    broker-url: ${ARTEMIS_BROKER_URL:tcp://localhost:61616?consumerWindowSize=0}
+    user: ${ARTEMIS_USER:admin}
+    password: ${ARTEMIS_PASSWORD:admin}
+
+lifeline:
+  worker:
+    destination: ${LIFELINE_WORKER_DESTINATION:lifeline.case.jobs}
+    dead-letter-destination: ${LIFELINE_WORKER_DEAD_LETTER_DESTINATION:lifeline.case.jobs.dlq}
+    pause-before-ack: ${LIFELINE_WORKER_PAUSE_BEFORE_ACK:0s}
+    concurrency: ${LIFELINE_WORKER_CONCURRENCY:1}
+    max-concurrency: ${LIFELINE_WORKER_MAX_CONCURRENCY:1}
+    backend-url: ${LIFELINE_BACKEND_URL:http://localhost:8080}
+    connect-timeout: ${LIFELINE_WORKER_CONNECT_TIMEOUT:5s}
+    read-timeout: ${LIFELINE_WORKER_READ_TIMEOUT:5s}
+    jwt-secret: ${JWT_SECRET}
+    jwt-issuer: ${JWT_ISSUER:lifeline}
+    jwt-expiration: ${LIFELINE_WORKER_JWT_EXPIRATION:PT5M}
